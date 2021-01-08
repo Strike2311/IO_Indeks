@@ -40,39 +40,42 @@ public Student wyswietl_dane_Studenta(Student student) { return null; }
 
 public void aktualizuj_oceny_Studenta(Student student) {  }
 
-public void zaloguj_sie(ArrayList<Uzytkownik> uzytkownicy,ArrayList<Prowadzacy> prowadzacy,ArrayList<Student> studenci,ArrayList<Administrator> administratorzy) {
-	int wybor_uzytkownika;
-	wybor_uzytkownika=scan.nextInt();
-	int id=scan.nextInt();
-	String haslo=scan.next();
-	if(sprawdzenie_poprawnosci_danych(id,haslo)==false) zaloguj_sie(uzytkownicy, prowadzacy, studenci, administratorzy);
-	switch(wybor_uzytkownika) {
-	case 1:
-		for(Student student : studenci) {
-			if(student.getID()==id)
-				aktualny_Uzytkownik = student;
-			return;
+	public Uzytkownik zaloguj_sie( ArrayList<Prowadzacy> prowadzacy, ArrayList<Student> studenci, ArrayList<Administrator> administratorzy) {
+		int wybor_uzytkownika;
+		wybor_uzytkownika = scan.nextInt();
+		int id = scan.nextInt();
+		scan.nextLine();
+		String haslo = scan.nextLine();
+		if (sprawdzenie_poprawnosci_danych(id, haslo) == false)
+			zaloguj_sie(prowadzacy, studenci, administratorzy);
+		switch (wybor_uzytkownika) {
+			case 1:
+				for (Student student : studenci) {
+					if (student.getID() == id)
+						aktualny_Uzytkownik = student;
+					return aktualny_Uzytkownik;
+				}
+				break;
+			case 2:
+				for (Prowadzacy prowadzacy1 : prowadzacy) {
+					if (prowadzacy1.getID() == id)
+						aktualny_Uzytkownik = prowadzacy1;
+
+					return aktualny_Uzytkownik;
+				}
+				break;
+			case 3:
+				for (Administrator administrator : administratorzy) {
+					if (administrator.getID() == id)
+						aktualny_Uzytkownik = administrator;
+					return aktualny_Uzytkownik;
+				}
+				break;
+			default:
+				break;
 		}
-		break;
-	case 2:
-		for(Prowadzacy prowadzacy1 : prowadzacy) {
-			if(prowadzacy1.getID()==id)
-				aktualny_Uzytkownik = prowadzacy1;
-			
-			return;
-		}	
-		break;
-	case 3:
-		for(Administrator administrator : administratorzy) {
-			if(administrator.getID()==id)
-				aktualny_Uzytkownik = administrator;
-			return;
-		}
-		break;
-	default: 
-		break;
+		return null;
 	}
-}
 
 public boolean sprawdzenie_poprawnosci_danych(int ID, String haslo) { 
 	
@@ -145,8 +148,7 @@ public static void main(String []args) {
 	Aplikacja aplikacja = new Aplikacja();
 	result=aplikacja.sprawdzenie_poprawnosci_danych(1,"haslo");
 	System.out.println(result);
-	aplikacja.zaloguj_sie(
-	uzytkownicy, prowadzacy, studenci, administratorzy);
+	aplikacja.zaloguj_sie(prowadzacy, studenci, administratorzy);
 	System.out.println(aktualny_Uzytkownik.getID()+" " +aktualny_Uzytkownik.getUprawnienia());
 }
 }
