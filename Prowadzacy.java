@@ -6,7 +6,7 @@ public class Prowadzacy extends Uzytkownik {
 	private int ID;
 	private String haslo;
 	private String mail;
-	private int uprawnienia;
+	private int uprawnienia=2;
 
 	public Prowadzacy(String imie, String nazwisko, int ID, String haslo, String mail,int uprawnienia) {
 		super(ID,haslo,uprawnienia);

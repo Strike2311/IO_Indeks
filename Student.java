@@ -10,7 +10,7 @@ private String mail;
 private ArrayList<Ocena> oceny = new ArrayList<Ocena>();
 private String wydzial;
 private String kierunek;
-private int uprawnienia;
+private int uprawnienia=1;
 
 public Student(String imie, String nazwisko, int ID, String haslo, String mail,String wydzial, String kierunek,int uprawnienia) {
 	super(ID,haslo,uprawnienia);

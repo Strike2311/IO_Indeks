@@ -2,6 +2,7 @@
 public class Ocena {
 private float wartosc;
 private Kurs kurs;
+
 public float getWartosc() {
 	return wartosc;
 }

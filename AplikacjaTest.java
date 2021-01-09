@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.*;
+/*import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -57,9 +57,10 @@ class AplikacjaTest {
 		assertFalse(output);
 	}
 	*/
-	
+	/*
 	@AfterClass
 	public static void tearDownClass() {
 		test = null;
 	}
 }
+*/

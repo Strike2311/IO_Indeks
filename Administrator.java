@@ -3,7 +3,7 @@ public class Administrator extends Uzytkownik{
 	private int ID;
 	private String haslo;
 	private String mail;
-	private int uprawnienia;
+	private int uprawnienia=3;
 
 	public Administrator(int ID, String haslo, String mail, int uprawnienia) {
 		super(ID,haslo,uprawnienia);

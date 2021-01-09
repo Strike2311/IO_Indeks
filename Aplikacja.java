@@ -34,11 +34,35 @@ public void setUzytkownicy(ArrayList<Uzytkownik> uzytkownicy) {
 	this.uzytkownicy = uzytkownicy;
 }
 
-public Student wyszukaj_ID_Studenta(Student id) { return null; }
+public Student wyszukaj_ID_Studenta(int id) {
+	for (Student student : studenci) {
+		if (student.getID() == id)
+			return student;
+	}
+	System.out.println("Taki student nie istnieje");
+	return null; }
 
-public Student wyswietl_dane_Studenta(Student student) { return null; }
+public Student wyswietl_dane_Studenta(Student student) {
+	System.out.println("ID : " + student.getID());
+	System.out.println("Imie : " + student.getImie());
+	System.out.println("Nazwisko : " +student.getNazwisko());
+	System.out.println("Kierunek : " + student.getKierunek());
+	System.out.println("Wydział : " + student.getWydzial());
+	System.out.println("Mail : " + student.getMail());
+	return null; }
 
-public void aktualizuj_oceny_Studenta(Student student) {  }
+public void aktualizuj_oceny_Studenta(Student student,String [] dane) {
+	ArrayList<Ocena> oceny_studenta;
+	 oceny_studenta = student.getOceny();
+	 Ocena ocena = new Ocena();
+	 for(Ocena ocena_studenta : oceny_studenta){
+	 	if(ocena.getKurs().equals(ocena_studenta)==true){
+	 		ocena_studenta.setWartosc(Float.parseFloat(dane[0]));
+	 		return;
+		}
+	 }
+	 student.getOceny().add(ocena);
+}
 
 	public Uzytkownik zaloguj_sie( ArrayList<Prowadzacy> prowadzacy, ArrayList<Student> studenci, ArrayList<Administrator> administratorzy) {
 		int wybor_uzytkownika;
@@ -114,15 +138,103 @@ public boolean sprawdzenie_poprawnosci_danych(int ID, String haslo) {
 
 	
 
-public void wyswietl_dane_personalne(int ID) { }
+public void wyswietl_dane_personalne(int ID) {
+	Uzytkownik uzytkownik;
+	uzytkownik = wyszukaj_ID_uzytkownika( ID);
+	int wybor_uzytkownika = uzytkownik.getUprawnienia();
+	switch (wybor_uzytkownika) {
+		case 1:
+			for(Student student : studenci){
+			if(student.getID()==ID){
+				System.out.println("Imie : " + student.getImie());
+				System.out.println("Nazwisko : " +student.getNazwisko());
+				System.out.println("Kierunek : " + student.getKierunek());
+				System.out.println("Wydział : " + student.getWydzial());
+				System.out.println("Mail : " + student.getMail());
 
-public void aktualizuj_dane_uzytkownika(int ID) { }
+			}
+			}
 
-public Uzytkownik wyszukaj_ID_uzytkownika(int ID) { 
-	
+			break;
+		case 2:
+			for(Prowadzacy profesor : prowadzacy){
+			if(profesor.getID()==ID){
+				System.out.println("Imie : " + profesor.getImie());
+				System.out.println("Nazwisko : " + profesor.getNazwisko());
+				System.out.println("Mail : " + profesor.getMail());
+			}
+			}
+			break;
+		case 3:
+			for(Administrator administrator : administratorzy){
+				if(administrator.getID()==ID){
+					System.out.println("Mail : " + administrator.getMail());
+				}
+			}
+			break;
+		default:
+			break;
+	}
+
+}
+
+public void aktualizuj_dane_uzytkownika(int ID,String dane[]) {
+	Uzytkownik uzytkownik;
+	uzytkownik = wyszukaj_ID_uzytkownika( ID);
+
+	if(sprawdzenie_poprawnosci_danych(Integer.parseInt(dane[0]),dane[1])==false){
+		System.out.println("Nie można zmienić danych na takie");
+		return;
+	}
+	uzytkownik.setID(Integer.parseInt(dane[0]));
+	uzytkownik.setHaslo(dane[1]);
+}
+
+public Uzytkownik wyszukaj_ID_uzytkownika(int ID) {
+	for (Uzytkownik uzytkownik:uzytkownicy)
+	{
+		if(ID==uzytkownik.getID()){
+			return uzytkownik;
+		}
+	}
+	System.out.println("Nie odnaleziono uzytkownika");
 	return null; }
 
-public void dodaj_nowego_uzytkownika(String dane[]) {  }
+
+public void dodaj_nowego_uzytkownika(String dane[],int wybor_uzytkownika,ArrayList<Prowadzacy> prowadzacy, ArrayList<Student> studenci, ArrayList<Administrator> administratorzy, ArrayList<Uzytkownik> uzytkownicy) {
+	Aplikacja aplikacja = new Aplikacja();
+	switch (wybor_uzytkownika) {
+		case 1:
+			Student student = new Student(dane[0],dane[1],Integer.parseInt(dane[2]),dane[3],dane[4],dane[5],dane[6],1);
+			if(sprawdzenie_poprawnosci_danych(student.getID(), student.getHaslo()) == false){
+				System.out.println("Nieprawidłowe hasło lub ID");
+				break;
+			}
+			studenci.add(student);
+			uzytkownicy.add(student);
+			break;
+		case 2:
+			Prowadzacy profesor = new Prowadzacy(dane[0],dane[1],Integer.parseInt(dane[2]),dane[3],dane[4],2);
+			if(sprawdzenie_poprawnosci_danych(profesor.getID(), profesor.getHaslo()) == false){
+				System.out.println("Nieprawidłowe hasło lub ID");
+				break;
+			}
+			prowadzacy.add(profesor);
+			uzytkownicy.add(profesor);
+			break;
+		case 3:
+			Administrator administrator = new Administrator(Integer.parseInt(dane[0]),dane[1],dane[2],3);
+			if(sprawdzenie_poprawnosci_danych(administrator.getID(), administrator.getHaslo()) == false){
+				System.out.println("Nieprawidłowe hasło lub ID");
+				break;
+			}
+			administratorzy.add(administrator);
+			uzytkownicy.add(administrator);
+			break;
+		default:
+			break;
+	}
+}
 
 public static void main(String []args) {
 	boolean result;
