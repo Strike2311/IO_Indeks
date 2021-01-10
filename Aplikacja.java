@@ -201,48 +201,51 @@ public Uzytkownik wyszukaj_ID_uzytkownika(int ID) {
 	return null; }
 
 
-public void dodaj_nowego_uzytkownika(String dane[],int wybor_uzytkownika,ArrayList<Prowadzacy> prowadzacy, ArrayList<Student> studenci, ArrayList<Administrator> administratorzy, ArrayList<Uzytkownik> uzytkownicy) {
-	Aplikacja aplikacja = new Aplikacja();
+public Uzytkownik dodaj_nowego_uzytkownika(String dane[],int wybor_uzytkownika,ArrayList<Prowadzacy> prowadzacy,
+									 ArrayList<Student> studenci, ArrayList<Administrator> administratorzy,ArrayList<Uzytkownik> uzytkownicy) {
 	switch (wybor_uzytkownika) {
 		case 1:
-			Student student = new Student(dane[0],dane[1],Integer.parseInt(dane[2]),dane[3],dane[4],dane[5],dane[6],1);
+			Student student = new Student(Integer.parseInt(dane[0]),dane[1],dane[2],Integer.parseInt(dane[3]),dane[4],dane[5],dane[6],dane[7]);
 			if(sprawdzenie_poprawnosci_danych(student.getID(), student.getHaslo()) == false){
 				System.out.println("Nieprawidłowe hasło lub ID");
 				break;
 			}
 			studenci.add(student);
 			uzytkownicy.add(student);
-			break;
+			return student;
+
 		case 2:
-			Prowadzacy profesor = new Prowadzacy(dane[0],dane[1],Integer.parseInt(dane[2]),dane[3],dane[4],2);
+			Prowadzacy profesor = new Prowadzacy(Integer.parseInt(dane[0]),dane[1],dane[2],Integer.parseInt(dane[3]),dane[4],dane[5]);
 			if(sprawdzenie_poprawnosci_danych(profesor.getID(), profesor.getHaslo()) == false){
 				System.out.println("Nieprawidłowe hasło lub ID");
 				break;
 			}
 			prowadzacy.add(profesor);
 			uzytkownicy.add(profesor);
-			break;
+			return profesor;
 		case 3:
-			Administrator administrator = new Administrator(Integer.parseInt(dane[0]),dane[1],dane[2],3);
+			Administrator administrator = new Administrator(Integer.parseInt(dane[0]),dane[1],dane[2],Integer.parseInt(dane[3]));
 			if(sprawdzenie_poprawnosci_danych(administrator.getID(), administrator.getHaslo()) == false){
 				System.out.println("Nieprawidłowe hasło lub ID");
 				break;
 			}
 			administratorzy.add(administrator);
 			uzytkownicy.add(administrator);
-			break;
+			return administrator;
+
 		default:
-			break;
+			return null;
 	}
+	return null;
 }
 
 public static void main(String []args) {
 	boolean result;
-	Uzytkownik uzytkownik1 = new Uzytkownik(1,"haslo",0);
-	Uzytkownik uzytkownik2 = new Uzytkownik(2,"haslo",0);
-	Uzytkownik uzytkownik3 = new Uzytkownik(3,"haslo",0);
+	Uzytkownik uzytkownik1 = new Uzytkownik(123456,"haslo123",0);
+	Uzytkownik uzytkownik2 = new Uzytkownik(234567,"haslo123",0);
+	Uzytkownik uzytkownik3 = new Uzytkownik(345678,"haslo123",0);
 	
-	Student student1 = new Student("ja", "xyz", 2, "haslo", "mail", "wydzial", "kierunek", 1);
+	Student student1 = new Student(223322, "xyzaaa123", "ja", 1, "Mariusz", "Aaaaaa", "Elektronika", "Informatyka");
 	ArrayList<Ocena> oceny = student1.getOceny();
 	Ocena ocena = new Ocena();
 	Kurs kurs = new Kurs(null, null, 0, null, null);
@@ -258,7 +261,7 @@ public static void main(String []args) {
 	uzytkownicy.add(uzytkownik3);
 	studenci.add(student1);
 	Aplikacja aplikacja = new Aplikacja();
-	result=aplikacja.sprawdzenie_poprawnosci_danych(1,"haslo");
+	result=aplikacja.sprawdzenie_poprawnosci_danych(123456,"haslo123");
 	System.out.println(result);
 	aplikacja.zaloguj_sie(prowadzacy, studenci, administratorzy);
 	System.out.println(aktualny_Uzytkownik.getID()+" " +aktualny_Uzytkownik.getUprawnienia());

@@ -26,4 +26,10 @@ public Uzytkownik(int id, String haslo, int uprawnienia) {
 	this.uprawnienia = uprawnienia;
 }
 
+public boolean equals(Uzytkownik check){
+	if(this.getID() != check.getID() || this.getHaslo() != check.getHaslo() || this.getUprawnienia() != this.getUprawnienia()){
+		return false;
+	}
+	return true;
+}
 }

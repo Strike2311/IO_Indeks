@@ -12,7 +12,7 @@ private String wydzial;
 private String kierunek;
 private int uprawnienia=1;
 
-public Student(String imie, String nazwisko, int ID, String haslo, String mail,String wydzial, String kierunek,int uprawnienia) {
+public Student(int ID, String haslo, String mail,int uprawnienia,String imie, String nazwisko, String wydzial, String kierunek) {
 	super(ID,haslo,uprawnienia);
 	this.imie = imie;
 	this.nazwisko = nazwisko;
@@ -23,7 +23,13 @@ public Student(String imie, String nazwisko, int ID, String haslo, String mail,S
 	this.kierunek = kierunek;
 	
 }
+public boolean equals(Student check){
+	if(this.getID() != check.getID() || this.getHaslo() != check.getHaslo() || this.getUprawnienia() != this.getUprawnienia()
+	|| this.getMail() != check.getMail() || this.getImie() != check.getImie() || this.getNazwisko() != check.getNazwisko() ||
+			this.getKierunek() != check.getKierunek() || this.getWydzial() != check.getWydzial()) return false;
 
+	return true;
+}
 public String getImie() {
 	return imie;
 }

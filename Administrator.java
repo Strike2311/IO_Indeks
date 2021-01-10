@@ -11,7 +11,12 @@ public class Administrator extends Uzytkownik{
 		this.haslo = haslo;
 		this.mail = mail;
 	}
+	public boolean equals(Student check){
+		if(this.getID() != check.getID() || this.getHaslo() != check.getHaslo() || this.getUprawnienia() != this.getUprawnienia()
+				|| this.getMail() != check.getMail()) return false;
 
+		return true;
+	}
 	
 	public String getMail() {
 		return mail;

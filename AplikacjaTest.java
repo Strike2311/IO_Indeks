@@ -1,7 +1,7 @@
-/*import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.testng.annotations.AfterClass;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,9 +9,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class AplikacjaTest {
 
-	static Aplikacja test = new Aplikacja();
-	static Dane dane = new Dane();
-	
+	static Aplikacja test;
+	static Dane dane;
+
+	@BeforeAll
+	static public void init(){
+		dane= new Dane();
+		test = new Aplikacja();
+	}
+
+	/*
+	* Test parametryzowany
+	* */
 	@ParameterizedTest(name = "{index} => ID = {0}, haslo = {1}")
 	@CsvSource({ "123456,  'AlamaKota1',    true",
 				 "123,     'AlamaKota2',    false", 
@@ -27,40 +36,60 @@ class AplikacjaTest {
 		assertEquals(check,equal);
 	}
 	
-	//@Test
-	//void testSprawdzeniePoprawnosciDanych() {
-	//	for(int i=0; i<6; i++) {
-	//	boolean check = test.sprawdzenie_poprawnosci_danych(Integer.parseInt(dane.daneSprawdzeniePoprawnosciDanych[i][1]), dane.daneSprawdzeniePoprawnosciDanych[i][2]);
-	//	assertEquals(Boolean.parseBoolean(dane.daneSprawdzeniePoprawnosciDanych[i][3]),check);
-//		}
-	//	
-	//}
+	@Test
+	void testDodanieNowegoUzytkownika() {
+		for(int i = 0; i<6; i++){
+			Uzytkownik actual = test.dodaj_nowego_uzytkownika(dane.daneDodajUzytkownika[i],Integer.parseInt(dane.daneDodajUzytkownika[i][3]), test.getProwadzacy(), test.getStudenci(), test.getAdministrztorzy(), test.getUzytkownicy());
+			switch(Integer.parseInt(dane.daneDodajUzytkownika[i][3])){
+				case 1:
+					Student expected1 = new Student(Integer.parseInt(dane.daneDodajUzytkownika[i][0]), dane.daneDodajUzytkownika[i][1], dane.daneDodajUzytkownika[i][2],
+							Integer.parseInt(dane.daneDodajUzytkownika[i][3]),dane.daneDodajUzytkownika[i][4],(dane.daneDodajUzytkownika[i][5]),
+							dane.daneDodajUzytkownika[i][6],dane.daneDodajUzytkownika[i][7]);
+					assertTrue(expected1.equals(actual));
+					break;
+				case 2:
+					Prowadzacy expected2 = new Prowadzacy(Integer.parseInt(dane.daneDodajUzytkownika[i][0]),dane.daneDodajUzytkownika[i][1],dane.daneDodajUzytkownika[i][2],
+							Integer.parseInt(dane.daneDodajUzytkownika[i][3]),dane.daneDodajUzytkownika[i][4],(dane.daneDodajUzytkownika[i][5]));
+					assertTrue(expected2.equals(actual));
+					break;
+				case 3:
+					Administrator expected3 = new Administrator(Integer.parseInt(dane.daneDodajUzytkownika[i][0]),dane.daneDodajUzytkownika[i][1],dane.daneDodajUzytkownika[i][2],
+							Integer.parseInt(dane.daneDodajUzytkownika[i][3]));
+					assertTrue(expected3.equals(actual));
+
+					break;
+			}
+
+		}
+
+
+	}
 	
-	/*
+/*
 	void testSprawdzeniePoprawnosciDanych(int ID, String haslo) {
 		boolean output = test.sprawdzenie_poprawnosci_danych(248834, "AlamaKota1"); //poprawny zapis
 		assertTrue(output);
 		
-		output = test.sprawdzenie_poprawnosci_danych(121, "AlamaKota1");//bledny zapis, za krótkie ID
+		output = test.sprawdzenie_poprawnosci_danych(121, "AlamaKota1");//bledny zapis, za krï¿½tkie ID
 		assertFalse(output);
 		
-		output = test.sprawdzenie_poprawnosci_danych(211121, "12345678");//b³êdny zapis, brak liter
+		output = test.sprawdzenie_poprawnosci_danych(211121, "12345678");//bï¿½ï¿½dny zapis, brak liter
 		assertFalse(output);
 		
-		output = test.sprawdzenie_poprawnosci_danych(211121, "abcdefgh");//b³êdny zapis, brak cyfr
+		output = test.sprawdzenie_poprawnosci_danych(211121, "abcdefgh");//bï¿½ï¿½dny zapis, brak cyfr
 		assertFalse(output);
 		
-		output = test.sprawdzenie_poprawnosci_danych(211121, "1!345`~78");//b³êdny zapis, znaki specjalne
+		output = test.sprawdzenie_poprawnosci_danych(211121, "1!345`~78");//bï¿½ï¿½dny zapis, znaki specjalne
 		assertFalse(output);
 		
-		output = test.sprawdzenie_poprawnosci_danych(2112214, "12345678");//b³êdny zapis, za d³ugie ID
+		output = test.sprawdzenie_poprawnosci_danych(2112214, "12345678");//bï¿½ï¿½dny zapis, za dï¿½ugie ID
 		assertFalse(output);
 	}
-	*/
-	/*
+*/
+
 	@AfterClass
 	public static void tearDownClass() {
 		test = null;
+		dane = null;
 	}
 }
-*/
