@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.testng.annotations.AfterClass;
+//import org.testng.annotations.AfterClass;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -87,7 +87,7 @@ class AplikacjaTest {
 	}
 */
 
-	@AfterClass
+	//@AfterClass
 	public static void tearDownClass() {
 		test = null;
 		dane = null;
