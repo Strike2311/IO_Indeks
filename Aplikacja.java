@@ -173,7 +173,7 @@ Login_View login_view = new Login_View();
 		student.setWydzial(nowyStudentView.getWydzialField().getText());
 		student.setKierunek(nowyStudentView.getKierunekField().getText());
 	}
-
+	//to podobnie jak studenta będzie
 	private void initModyfikujProwadzacy(AdministratorView administratorView){
 		String id_uzytkownika_string = administratorView.getIdUzytkownikaField().getText();
 		int id_uzytkownika = Integer.parseInt(id_uzytkownika_string);
