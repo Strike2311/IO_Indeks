@@ -3,7 +3,6 @@ package indeks;
 import static org.junit.jupiter.api.Assertions.*;
 
 import indeks.Administrator;
-import indeks.Aplikacja;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 //import org.testng.annotations.AfterClass;
@@ -13,6 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.sql.SQLException;
+import indeks.Aplikacja;
 import java.util.ArrayList;
 
 class AplikacjaTest {
