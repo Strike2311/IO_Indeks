@@ -10,7 +10,7 @@ public class StudentView {
     private JTable table1;
     public final JFrame frame;
     public StudentView() {
-        frame = new JFrame("Student");
+        frame = new JFrame("indeks.Student");
         idLabel.setVisible(true);
         frame.setContentPane(studentPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

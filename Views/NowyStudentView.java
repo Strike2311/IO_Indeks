@@ -21,7 +21,7 @@ public class NowyStudentView {
     private JPanel contentPane;
     private final JFrame frame;
     public NowyStudentView(){
-        frame = new JFrame("Student");
+        frame = new JFrame("indeks.Student");
         idLabel.setVisible(true);
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

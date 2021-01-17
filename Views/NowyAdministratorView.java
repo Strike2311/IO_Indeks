@@ -13,7 +13,7 @@ public class NowyAdministratorView {
     private JButton acceptButton;
     private JFrame frame;
     public NowyAdministratorView(){
-        frame = new JFrame("Administrator");
+        frame = new JFrame("indeks.Administrator");
         idLabel.setVisible(true);
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

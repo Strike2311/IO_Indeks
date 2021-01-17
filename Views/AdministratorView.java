@@ -17,7 +17,7 @@ public class AdministratorView {
     private JTextField idUzytkownikaField;
     private final JFrame frame;
     public AdministratorView(){
-        frame = new JFrame("Administrator");
+        frame = new JFrame("indeks.Administrator");
         idLabel.setVisible(true);
         frame.setContentPane(AdministratorPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

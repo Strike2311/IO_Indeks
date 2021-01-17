@@ -17,7 +17,7 @@ public class NowyProwadzacyView {
     private JPanel contentPane;
     private final JFrame frame;
     public NowyProwadzacyView(){
-        frame = new JFrame("Prowadzacy");
+        frame = new JFrame("indeks.Prowadzacy");
         idLabel.setVisible(true);
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
