@@ -7,10 +7,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 class AplikacjaTest {
 
 	static Aplikacja test;
 	static Dane dane;
+	public ArrayList<Student> studenci = new ArrayList<Student>();
 
 	@BeforeAll
 	static public void init(){
@@ -46,6 +50,7 @@ class AplikacjaTest {
 							Integer.parseInt(dane.daneDodajUzytkownika[i][3]),dane.daneDodajUzytkownika[i][4],(dane.daneDodajUzytkownika[i][5]),
 							dane.daneDodajUzytkownika[i][6],dane.daneDodajUzytkownika[i][7]);
 					assertTrue(expected1.equals(actual));
+					studenci.add(expected1);
 					break;
 				case 2:
 					Prowadzacy expected2 = new Prowadzacy(Integer.parseInt(dane.daneDodajUzytkownika[i][0]),dane.daneDodajUzytkownika[i][1],dane.daneDodajUzytkownika[i][2],
@@ -64,7 +69,16 @@ class AplikacjaTest {
 
 
 	}
-	
+	@Test
+	public void test_wyszukaj_ID_uzytkownika_studenta(){
+		//we tu dodaj bo trzeba tą liste studentów gdzieś przechowywać
+		//assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(244422,studenci));
+		//assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(112233,studenci));
+		assertThrows(IllegalArgumentException.class,() -> test.wyszukaj_ID_uzytkownika_studenta(112233,studenci));
+		assertThrows(IllegalArgumentException.class,()->test.wyszukaj_ID_uzytkownika_studenta(9999,studenci));
+
+
+	}
 /*
 	void testSprawdzeniePoprawnosciDanych(int ID, String haslo) {
 		boolean output = test.sprawdzenie_poprawnosci_danych(248834, "AlamaKota1"); //poprawny zapis

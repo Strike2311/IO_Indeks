@@ -146,10 +146,8 @@ Login_View login_view = new Login_View();
 		String id_uzytkownika_string = administratorView.getIdUzytkownikaField().getText();
 		int id_uzytkownika = Integer.parseInt(id_uzytkownika_string);
 		Student student;
-		student =  wyszukaj_ID_uzytkownika_studenta(id_uzytkownika);
-		if(student==null){
-			System.out.println("dupa");
-		}
+		student =  wyszukaj_ID_uzytkownika_studenta(id_uzytkownika,studenci);
+
 		NowyStudentView nowyStudentView = new NowyStudentView();
 		int id_studenta;
 		id_studenta = student.getID();
@@ -326,13 +324,13 @@ public void aktualizuj_dane_uzytkownika(int ID,String dane[]) {
 	uzytkownik.setHaslo(dane[1]);
 }
 
-public Student wyszukaj_ID_uzytkownika_studenta(int ID){
+public Student wyszukaj_ID_uzytkownika_studenta(int ID,ArrayList<Student> studenci) {
 	for(Student student : studenci){
 		if(student.getID()==ID){
 			return student;
 		}
 	}
-	return null;
+	throw new IllegalArgumentException("Nie ma studenta o takim ID");
 }
 public Uzytkownik wyszukaj_ID_uzytkownika(int ID) {
 		int wybor_uzytkownika=0;
@@ -440,6 +438,7 @@ public static void main(String []args) {
 	aplikacja.prowadzacy.add(prowadzacy1);
 	aplikacja.administratorzy.add(administrator1);
 	aplikacja.uzytkownicy.add(administrator1);
+
 	aplikacja.init();
 
 }
