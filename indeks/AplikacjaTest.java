@@ -10,11 +10,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 class AplikacjaTest {
 
 	static Aplikacja test;
 	static Dane dane;
+	public ArrayList<Student> studenci = new ArrayList<Student>();
 
 	@BeforeAll
 	static public void init(){
@@ -49,12 +54,13 @@ class AplikacjaTest {
 					Student expected1 = new Student(Integer.parseInt(dane.daneDodajUzytkownika[i][0]), dane.daneDodajUzytkownika[i][1], dane.daneDodajUzytkownika[i][2],
 							Integer.parseInt(dane.daneDodajUzytkownika[i][3]),dane.daneDodajUzytkownika[i][4],(dane.daneDodajUzytkownika[i][5]),
 							dane.daneDodajUzytkownika[i][6],dane.daneDodajUzytkownika[i][7]);
-					Assertions.assertTrue(expected1.equals(actual));
+					assertTrue(expected1.equals(actual));
+					studenci.add(expected1);
 					break;
 				case 2:
 					Prowadzacy expected2 = new Prowadzacy(Integer.parseInt(dane.daneDodajUzytkownika[i][0]),dane.daneDodajUzytkownika[i][1],dane.daneDodajUzytkownika[i][2],
 							Integer.parseInt(dane.daneDodajUzytkownika[i][3]),dane.daneDodajUzytkownika[i][4],(dane.daneDodajUzytkownika[i][5]));
-					Assertions.assertTrue(expected2.equals(actual));
+					assertTrue(expected2.equals(actual));
 					break;
 				case 3:
 					Administrator expected3 = new Administrator(Integer.parseInt(dane.daneDodajUzytkownika[i][0]),dane.daneDodajUzytkownika[i][1],dane.daneDodajUzytkownika[i][2],
@@ -69,6 +75,37 @@ class AplikacjaTest {
 
 	}
 
+	@Test
+	public void test_wyszukaj_ID_uzytkownika_studenta(){
+		testDodanieNowegoUzytkownika();
+
+		assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(244422,studenci));
+		assertThrows(IllegalArgumentException.class,() -> test.wyszukaj_ID_uzytkownika_studenta(0,studenci));
+		assertThrows(IllegalArgumentException.class,()->test.wyszukaj_ID_uzytkownika_studenta(9999,studenci));
+		assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(112233,studenci));
+
+	}
+/*
+	void testSprawdzeniePoprawnosciDanych(int ID, String haslo) {
+		boolean output = test.sprawdzenie_poprawnosci_danych(248834, "AlamaKota1"); //poprawny zapis
+		assertTrue(output);
+
+		output = test.sprawdzenie_poprawnosci_danych(121, "AlamaKota1");//bledny zapis, za kr�tkie ID
+		assertFalse(output);
+
+		output = test.sprawdzenie_poprawnosci_danych(211121, "12345678");//b��dny zapis, brak liter
+		assertFalse(output);
+
+		output = test.sprawdzenie_poprawnosci_danych(211121, "abcdefgh");//b��dny zapis, brak cyfr
+		assertFalse(output);
+
+		output = test.sprawdzenie_poprawnosci_danych(211121, "1!345`~78");//b��dny zapis, znaki specjalne
+		assertFalse(output);
+
+		output = test.sprawdzenie_poprawnosci_danych(2112214, "12345678");//b��dny zapis, za d�ugie ID
+		assertFalse(output);
+	}
+*/
 
 	//@AfterClass
 	public static void tearDownClass() {
