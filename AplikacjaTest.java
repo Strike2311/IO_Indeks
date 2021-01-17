@@ -71,12 +71,12 @@ class AplikacjaTest {
 	}
 	@Test
 	public void test_wyszukaj_ID_uzytkownika_studenta(){
-		//we tu dodaj bo trzeba tą liste studentów gdzieś przechowywać
-		//assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(244422,studenci));
-		//assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(112233,studenci));
-		assertThrows(IllegalArgumentException.class,() -> test.wyszukaj_ID_uzytkownika_studenta(112233,studenci));
-		assertThrows(IllegalArgumentException.class,()->test.wyszukaj_ID_uzytkownika_studenta(9999,studenci));
+		testDodanieNowegoUzytkownika();
 
+		assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(244422,studenci));
+		assertThrows(IllegalArgumentException.class,() -> test.wyszukaj_ID_uzytkownika_studenta(0,studenci));
+		assertThrows(IllegalArgumentException.class,()->test.wyszukaj_ID_uzytkownika_studenta(9999,studenci));
+		assertDoesNotThrow(()->test.wyszukaj_ID_uzytkownika_studenta(112233,studenci));
 
 	}
 /*
