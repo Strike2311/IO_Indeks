@@ -1,0 +1,7 @@
+---
+Suite
+---
+!contents -R2 -g -p -f -h
+
+"Testy akceptacyjne systemu zarządzania spisem studentów uczelni wyższej"
+!path "C:\Users\kacpe\IdeaProjects\IO_Indeks"

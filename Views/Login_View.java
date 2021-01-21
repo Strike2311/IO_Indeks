@@ -18,9 +18,9 @@ public class Login_View {
 
     public Login_View() {
         frame = new JFrame("Logowanie");
-        loginBox.addItem("indeks.Student");
-        loginBox.addItem("indeks.Prowadzacy");
-        loginBox.addItem("indeks.Administrator");
+        loginBox.addItem("Student");
+        loginBox.addItem("Prowadzacy");
+        loginBox.addItem("Administrator");
 
         frame.setContentPane(dataPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
